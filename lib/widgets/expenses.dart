@@ -88,10 +88,12 @@ class _ExpensesState extends State<Expenses> {
           icon: const Icon(Icons.add),
         ),
       ]),
-      body: Column(children: [
-        const Text('The chart'),
-        Expanded(child: mainContent),
-      ]),
+      body: Column(
+        children: [
+          const Text('The chart'),
+          Expanded(child: mainContent),
+        ],
+      ),
     );
   }
 }
