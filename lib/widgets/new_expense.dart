@@ -37,7 +37,7 @@ class _NewExpenseState extends State<NewExpense> {
         Row(children: [
           TextButton(
               onPressed: () {
-                print('cancelar');
+                Navigator.pop(context);
               },
               child: Text('Cancel')),
           ElevatedButton(
