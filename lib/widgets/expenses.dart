@@ -15,10 +15,10 @@ class Expenses extends StatefulWidget {
 class _ExpensesState extends State<Expenses> {
   final List<Expense> _registeredExpenses = [
     Expense(
-        title: 'Tibia',
+        title: 'Flutter course',
         amount: 19.99,
         date: DateTime.now(),
-        category: Category.leisure),
+        category: Category.work),
     Expense(
         title: 'Cinema',
         amount: 15.69,
@@ -34,9 +34,12 @@ class _ExpensesState extends State<Expenses> {
   @override
   Widget build(context) {
     return Scaffold(
+        appBar: AppBar(title: const Text('EzTracker'), actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+        ]),
         body: Column(children: [
-      Text('The chart'),
-      Expanded(child: ExpensesList(expenses: _registeredExpenses)),
-    ]));
+          Text('The chart'),
+          Expanded(child: ExpensesList(expenses: _registeredExpenses)),
+        ]));
   }
 }
