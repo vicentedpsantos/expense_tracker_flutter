@@ -14,7 +14,7 @@ void main() {
         appBarTheme: const AppBarTheme().copyWith(
             backgroundColor: kColorScheme.onPrimaryContainer,
             foregroundColor: kColorScheme.primaryContainer),
-        cardTheme: CardTheme().copyWith(
+        cardTheme: const CardTheme().copyWith(
           color: kColorScheme.secondaryContainer,
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         ),
@@ -30,7 +30,7 @@ void main() {
                   fontSize: 14),
             ),
       ),
-      home: Expenses(),
+      home: const Expenses(),
     ),
   );
 }
