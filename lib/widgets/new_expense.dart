@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'package:expense_tracker/models/expense.dart';
+
 final formatter = DateFormat.yMd();
 
 class NewExpense extends StatefulWidget {
@@ -13,6 +15,7 @@ class NewExpense extends StatefulWidget {
 class _NewExpenseState extends State<NewExpense> {
   final _amountController = TextEditingController();
   final _titleController = TextEditingController();
+  Category _selectedCategory = Category.leisure;
   DateTime? _selectedDate;
 
   void _presentDatePicker() async {
@@ -26,6 +29,16 @@ class _NewExpenseState extends State<NewExpense> {
 
     setState(() {
       _selectedDate = pickedDate;
+    });
+  }
+
+  void _selectCategory(category) {
+    if (category == null) {
+      return;
+    }
+
+    setState(() {
+      _selectedCategory = category;
     });
   }
 
@@ -61,13 +74,27 @@ class _NewExpenseState extends State<NewExpense> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                Text(_selectedDate == null ? 'No date selected' : formatter.format(_selectedDate!)),
+                Text(_selectedDate == null
+                    ? 'No date selected'
+                    : formatter.format(_selectedDate!)),
                 IconButton(
                     onPressed: _presentDatePicker,
                     icon: const Icon(Icons.calendar_month)),
               ]))
         ]),
+        SizedBox(height: 16),
         Row(children: [
+          DropdownButton(
+              value: _selectedCategory,
+              items: Category.values
+                  .map((category) => DropdownMenuItem(
+                      value: category,
+                      child: Text(category.name.toUpperCase())))
+                  .toList(),
+              onChanged: (category) {
+                _selectCategory(category);
+              }),
+          const Spacer(),
           TextButton(
               onPressed: () {
                 Navigator.pop(context);
