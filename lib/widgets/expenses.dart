@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
+import 'package:expense_tracker/widgets/chart/chart.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -46,7 +47,8 @@ class _ExpensesState extends State<Expenses> {
     });
 
     ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
         action: SnackBarAction(
             label: 'Undo',
             onPressed: () {
@@ -55,7 +57,9 @@ class _ExpensesState extends State<Expenses> {
               });
             }),
         duration: const Duration(seconds: 3),
-        content: const Text('Expense deleted!')));
+        content: const Text('Expense deleted!'),
+      ),
+    );
   }
 
   void _openAddExpenseOverlay() {
@@ -85,13 +89,19 @@ class _ExpensesState extends State<Expenses> {
       appBar: AppBar(title: const Text('EzTracker'), actions: [
         IconButton(
           onPressed: _openAddExpenseOverlay,
-          icon: const Icon(Icons.add),
+          icon: const Icon(
+            Icons.add,
+          ),
         ),
       ]),
       body: Column(
         children: [
-          const Text('The chart'),
-          Expanded(child: mainContent),
+          Chart(
+            expenses: registeredExpenses,
+          ),
+          Expanded(
+            child: mainContent,
+          ),
         ],
       ),
     );
