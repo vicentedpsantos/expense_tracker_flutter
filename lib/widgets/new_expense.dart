@@ -11,6 +11,17 @@ class _NewExpenseState extends State<NewExpense> {
   final _amountController = TextEditingController();
   final _titleController = TextEditingController();
 
+  void _presentDatePicker() {
+    final now = DateTime.now();
+    final firstDate = DateTime(now.year - 1, now.month, now.day);
+
+    showDatePicker(
+        context: context,
+        initialDate: now,
+        firstDate: firstDate,
+        lastDate: now);
+  }
+
   @override
   void dispose() {
     _amountController.dispose();
@@ -29,11 +40,26 @@ class _NewExpenseState extends State<NewExpense> {
           decoration: InputDecoration(label: Text('Title')),
           controller: _titleController,
         ),
-        TextField(
-          decoration: InputDecoration(prefixText: '\$ ', label: Text('Amount')),
-          controller: _amountController,
-          keyboardType: TextInputType.numberWithOptions(decimal: true),
-        ),
+        Row(children: [
+          Expanded(
+              child: TextField(
+            decoration:
+                InputDecoration(prefixText: '\$ ', label: Text('Amount')),
+            controller: _amountController,
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
+          )),
+          const SizedBox(width: 16),
+          Expanded(
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                Text('Selected date'),
+                IconButton(
+                    onPressed: _presentDatePicker,
+                    icon: const Icon(Icons.calendar_month)),
+              ]))
+        ]),
         Row(children: [
           TextButton(
               onPressed: () {
