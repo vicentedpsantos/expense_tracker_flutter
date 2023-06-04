@@ -56,6 +56,16 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(context) {
+    Widget mainContent =
+        const Center(child: Text('No expenses found. Start adding some!'));
+
+    if (registeredExpenses.isNotEmpty) {
+      mainContent = ExpensesList(
+        expenses: registeredExpenses,
+        onRemoveExpense: _removeExpense,
+      );
+    }
+
     return Scaffold(
         appBar: AppBar(title: const Text('EzTracker'), actions: [
           IconButton(
@@ -63,11 +73,7 @@ class _ExpensesState extends State<Expenses> {
         ]),
         body: Column(children: [
           const Text('The chart'),
-          Expanded(
-              child: ExpensesList(
-            expenses: registeredExpenses,
-            onRemoveExpense: _removeExpense,
-          )),
+          Expanded(child: mainContent),
         ]));
   }
 }
