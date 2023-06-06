@@ -93,7 +93,7 @@ class _NewExpenseState extends State<NewExpense> {
     final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.fromLTRB(16, 48, 16, keyboardSpace + 16),
+      padding: EdgeInsets.fromLTRB(16, 16, 16, keyboardSpace + 16),
       child: Column(
         children: [
           TextField(
